@@ -1,0 +1,115 @@
+<script>
+
+    function rnd (num) {    //returns a number between 1 and *num*
+        var x = Math.floor((Math.random() * num) + 1);
+        return x;
+    }
+    function computerPlay () {
+        let rng = rnd (3);
+
+        if (rng === 1) {
+            return 'rock';
+        }
+         else if (rng === 2) {
+            return 'paper';
+        }
+         else if (rng === 3) {
+            return 'scissors';
+        }
+    }
+    
+    function playRound (playerSelection, computerSelection) {
+        let winnerAnnouncement;
+        let selection = playerSelection.toLowerCase();
+
+        let winner;
+
+        if (selection === computerSelection) {
+            winnerAnnouncement = 'It\'s a tie!';
+
+            winner = 0;
+            return winner;      //if winner === 0 it's a tie
+                               //if winner === 1 player won
+                              //if winner === 2 computer won
+        }
+        else if (selection === 'rock') {
+            if (computerSelection === 'scissors') {
+                winnerAnnouncement = 'Rock beats scissors. You win!';
+
+                winner = 1
+                return winner;
+            }
+            else if (computerSelection === 'paper') {
+                winnerAnnouncement = 'Paper beats rock. You lose.';
+                
+                winner = 2;
+                return winner;
+            }
+        }
+        else if (selection === 'paper') {
+            if (computerSelection === 'rock') {
+                winnerAnnouncement = 'Paper beats rock. You win!';
+
+                winner = 1;
+                return winner;
+            }
+            else if (computerSelection === 'scissors') {
+                winnerAnnouncement = 'Scissors beat paper. You lose.';
+                
+                winner = 2;
+                return winner;
+            }
+        }
+        else if (selection === 'scissors') {
+            if (computerSelection === 'rock') {
+                winnerAnnouncement = 'Rock beats scissors. You lose.';
+                
+                winner = 2;
+                return winner;
+            }
+            else if (computerSelection === 'paper') {
+                winnerAnnouncement = 'Scissors beat paper. You win!';
+
+                winner = 1;
+                return winner;
+            }
+        }
+    }
+    //game function should play 5 rounds of the game (unless either the player or the computer hits 3
+    //points before 5 rounds are played)
+    //TO DO:
+    
+    //--> stop the game if 3 points have been achieved
+    function game() {
+        let playerScore = 0;
+        let computerScore = 0;
+
+        for (let i = 0; i < 5; i++) {
+            let playerSelection = prompt ('Type one of the following: rock, paper OR scissors');
+            let computerSelection = computerPlay();
+
+            let checkWinner = playRound(playerSelection, computerSelection);
+            if (checkWinner === 1) {
+                playerScore++;
+            }
+            else if (checkWinner === 2) {
+                computerScore++;
+            }
+            console.log('Player Score: ' + playerScore + ' | Computer Score: ' + computerScore);
+        }
+        if (playerScore > computerScore) {
+            console.log ('You win!');
+        }
+        else if (playerScore < computerScore) {
+            console.log('You lose. Better luck next time.');
+        }
+        else if (playerScore === computerScore) {
+            console.log('It\'s a tie. Try again?');
+        }
+
+    }
+
+
+    game ();
+
+</script>
