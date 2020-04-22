@@ -1,0 +1,33 @@
+html {
+    background: rgb(127, 39, 209);
+}
+.buttons {
+    display: flex;
+    height: 90vh;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+button {
+    font-size: x-large;
+    margin: 15px;
+    width: 200px;
+    height: 50px;
+}
+#results {
+    position: absolute;
+    margin-top: 50px;
+}
+.score {
+    display: flex;
+    width: 100%;
+    font-size: 50px;
+    justify-content: space-between;
+    background-color: rgb(112, 36, 182);
+}
+#winnerAnnouncer {
+    position: absolute;
+    padding-bottom: 300px;
+    text-shadow: 1px 1px black;
+    font-size: xx-large;
+}

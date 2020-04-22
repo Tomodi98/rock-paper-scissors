@@ -1,4 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <title>Rock, Paper, Scissors</title>
+    </head>
+    <body>
+            <div class="score">
+                <div class="scorePlayer">Player Score: 0</div>
+                <div class="scoreComputer">Computer Score: 0</div>
+            </div>
+
+        <div class="buttons">
+            <div id="winnerAnnouncer"></div>
+
+            <button id="rock">Rock</button>
+            <button id="paper">Paper</button>
+            <button id="scissors">Scissors</button>
+
+            <div id="results"></div>
+        </div>
+    </body>
+</html>
+
 <script>
+    const container = document.querySelector('#results');
+    const buttons = document.querySelectorAll('button');
+
+    const scoreComputer = document.querySelector('.scoreComputer');
+    const scorePlayer = document.querySelector('.scorePlayer');
+    const winnerAnnouncer = document.querySelector('#winnerAnnouncer');
+
+
+    let player = 0;
+    let computer = 0;
+
+    buttons.forEach((button) => {
+        button.addEventListener('click', (e) => {
+        playRound(button.id, computerPlay);
+        scorePlayer.textContent = 'Player Score: ' + player;
+        scoreComputer.textContent = 'Computer Score: ' + computer;
+        checkScore();
+  });
+});
+    function checkScore () {
+        if (winnerAnnouncer.textContent !=='') {
+            winnerAnnouncer.textContent = '';
+        }
+        if (scorePlayer.textContent === 'Player Score: 5') {
+            player = 0;
+            computer = 0;
+            winnerAnnouncer.textContent = 'You win!';
+            winnerAnnouncer.style.color = 'green';
+        }
+        else if (scoreComputer.textContent === 'Computer Score: 5') {
+            player = 0;
+            computer = 0;
+            winnerAnnouncer.textContent = 'You lose.';
+            winnerAnnouncer.style.color = 'red';
+        }
+    }
 
     function rnd (num) {    //returns a number between 1 and *num*
         var x = Math.floor((Math.random() * num) + 1);
@@ -22,12 +82,16 @@
         let winnerAnnouncement;
         let selection = playerSelection.toLowerCase();
 
+        computerSelection = computerPlay();
+
+
         let winner;
 
         if (selection === computerSelection) {
             winnerAnnouncement = 'It\'s a tie!';
 
             winner = 0;
+            container.textContent = winnerAnnouncement;
             return winner;      //if winner === 0 it's a tie
                                //if winner === 1 player won
                               //if winner === 2 computer won
@@ -37,12 +101,16 @@
                 winnerAnnouncement = 'Rock beats scissors. You win!';
 
                 winner = 1
+                player++;
+                container.textContent = winnerAnnouncement;
                 return winner;
             }
             else if (computerSelection === 'paper') {
                 winnerAnnouncement = 'Paper beats rock. You lose.';
                 
                 winner = 2;
+                computer++;
+                container.textContent = winnerAnnouncement;
                 return winner;
             }
         }
@@ -51,12 +119,16 @@
                 winnerAnnouncement = 'Paper beats rock. You win!';
 
                 winner = 1;
+                player++;
+                container.textContent = winnerAnnouncement;
                 return winner;
             }
             else if (computerSelection === 'scissors') {
                 winnerAnnouncement = 'Scissors beat paper. You lose.';
                 
                 winner = 2;
+                computer++;
+                container.textContent = winnerAnnouncement;
                 return winner;
             }
         }
@@ -65,12 +137,16 @@
                 winnerAnnouncement = 'Rock beats scissors. You lose.';
                 
                 winner = 2;
+                computer++;
+                container.textContent = winnerAnnouncement;
                 return winner;
             }
             else if (computerSelection === 'paper') {
                 winnerAnnouncement = 'Scissors beat paper. You win!';
 
                 winner = 1;
+                player++;
+                container.textContent = winnerAnnouncement;
                 return winner;
             }
         }
@@ -84,8 +160,8 @@
         let playerScore = 0;
         let computerScore = 0;
 
-        for (let i = 0; i < 5; i++) {
-            let playerSelection = prompt ('Type one of the following: rock, paper OR scissors');
+        for (let i = 0; i < 5; i++) {   
+           // let playerSelection = prompt ('Type one of the following: rock, paper OR scissors');
             let computerSelection = computerPlay();
 
             let checkWinner = playRound(playerSelection, computerSelection);
@@ -110,6 +186,6 @@
     }
 
 
-    game ();
+    //game ();
 
 </script>
